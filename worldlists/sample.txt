@@ -1,8 +1,0 @@
-main
-chat
-admin
-huhu
-thenga
-photo
-photos
-new
