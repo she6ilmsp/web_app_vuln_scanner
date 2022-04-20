@@ -21,10 +21,13 @@ class Scanner:
                 except requests.exceptions.ConnectionError:
                     print("Not this")
                     pass
-                
 
-target_url = "https://silkavenue.pk/my-account/"
+target_url = ""
 wordlist = "subdomain_wordlist.txt"
 
-find_subdomains = Scanner(target_url, wordlist)
-find_subdomains.get_subdomain()
+try:
+    find_subdomains = Scanner(target_url, wordlist)
+    find_subdomains.get_subdomain()
+except KeyboardInterrupt():
+    print("\nExiting program.......")
+    quit()

@@ -9,6 +9,7 @@ class Scanner:
     def __init__(self, url):
         self.session = requests.Session()
         self.target_url = url
+        self.payload = "<ScrIpT>alert('poda');</scRiPt>"
         self.directories = []
 
     def get_directories(self, url=None):
@@ -69,26 +70,28 @@ class Scanner:
             print("\nTesting Finished. and there is no XSS vulnerabilities")
 
     def test_xss_vuln_in_get(self, url):
-        payload = "<script>alert('poda');</scri>"
-        url = url.replace("=", "=" + payload)
+        url = url.replace("=", "=" + self.payload)
         response = self.session.get(url)
-        return payload in str(response.content)
+        return self.payload in str(response.content)
 
     def test_xss_vuln_in_post(self, form, url):
-        payload = "<script>alert('poda');</scri>"
-        response = self.post_form(form, payload, url)
-        return payload in str(response.content)
+        response = self.post_form(form, self.payload, url)
+        return self.payload in str(response.content)
 
 
-target_url = "https://silkavenue.pk/return-and-shipping/"
+target_url = ""
 
-vuln_scanner = Scanner(target_url)
-print("All directories belongs to this website are...\n")
-vuln_scanner.get_directories()
-if vuln_scanner.directories != None:
-    print("\nFound all directories\n")
-else:
-    print("\nOops! didn't find any directories\n")
+try:
+    vuln_scanner = Scanner(target_url)
+    print("All directories belongs to this website are...\n")
+    vuln_scanner.get_directories()
+    if vuln_scanner.directories != None:
+        print("\nFound all directories\n")
+    else:
+        print("\nOops! didn't find any directories\n")
 
-print("\nTesting directories if there is any vulnerability..\n")
-vuln_scanner.run_scanner()
+    print("\nTesting directories if there is any vulnerability..\n")
+    vuln_scanner.run_scanner()
+except KeyboardInterrupt:
+    print("\nExiting program.......")
+    quit()
