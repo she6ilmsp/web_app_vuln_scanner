@@ -64,10 +64,6 @@ class Scanner:
                 is_vulnerable_to_xss = self.test_xss_vuln_in_get(directory)
                 if is_vulnerable_to_xss:
                     print("\n\n[+++++] XSS Vulnerability found in parameter\n\n")
-        if is_vulnerable_to_xss:
-            print("\nTesting finished. Found some XSS vulnerablities.")
-        else:
-            print("\nTesting Finished. and there is no XSS vulnerabilities")
 
     def test_xss_vuln_in_get(self, url):
         url = url.replace("=", "=" + self.payload)
@@ -92,6 +88,7 @@ try:
 
     print("\nTesting directories if there is any vulnerability..\n")
     vuln_scanner.run_scanner()
+    print("\nTesting finished.")
 except KeyboardInterrupt:
     print("\nExiting program.......")
     quit()
