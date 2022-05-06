@@ -19,7 +19,6 @@ class Scanner:
                         self.subdomains.append(test_url)
                         print(test_url)
                 except requests.exceptions.ConnectionError:
-                    print("Not this")
                     pass
 
 target_url = ""
